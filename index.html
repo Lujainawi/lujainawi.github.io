@@ -1,0 +1,885 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="האתר האישי של לוג'ין עווידאת, סטודנטית למדעי המחשב ומפתחת תוכנה.">
+    <link rel="icon" href="assets/lujain_avatar.png" type="image/png">
+    <title>לוג'יין עווידאת | מדעי המחשב ופיתוח תוכנה</title>
+    <style>
+        :root {
+            --paper: #f8f8f3;
+            --white: #fffefb;
+            --ink: #213440;
+            --muted: #61717a;
+            --blue: #4d7f98;
+            --teal: #4f8d83;
+            --mint: #dcebe5;
+            --line: #d9e2df;
+            --navy: #243e4d;
+            --shadow: 0 18px 50px rgba(43, 68, 78, .08)
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: linear-gradient(rgba(77, 127, 152, .035) 1px, transparent 1px) 0 0/100% 32px, var(--paper);
+            font-family: Arial, "Noto Sans Hebrew", sans-serif;
+            line-height: 1.75
+        }
+
+        a {
+            color: inherit
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin-top: 0
+        }
+
+        .container {
+            width: min(1060px, calc(100% - 40px));
+            margin-inline: auto
+        }
+
+        .site-header {
+            padding-block: 22px;
+            border-bottom: 1px solid rgba(217, 226, 223, .75);
+            background: rgba(248, 248, 243, .92)
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px
+        }
+
+        .brand {
+            color: var(--navy);
+            font-size: 1.08rem;
+            font-weight: 800;
+            text-decoration: none
+        }
+
+        .brand:after {
+            display: block;
+            width: 38px;
+            height: 2px;
+            margin-top: 2px;
+            background: var(--teal);
+            content: ""
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            margin: 0;
+            padding: 0;
+            list-style: none
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            font-size: .92rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: color .16s
+        }
+
+        .nav-links a:hover {
+            color: var(--blue)
+        }
+
+        main {
+            overflow: hidden
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.45fr .55fr;
+            align-items: center;
+            gap: 52px;
+            min-height: 610px;
+            padding-block: 86px 108px
+        }
+
+        .kicker {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+            color: var(--teal);
+            font-size: .88rem;
+            font-weight: 800
+        }
+
+        .kicker:before {
+            width: 26px;
+            height: 1px;
+            background: currentColor;
+            content: ""
+        }
+
+        h1 {
+            max-width: 730px;
+            margin-bottom: 20px;
+            font-size: clamp(3.2rem, 8vw, 6.4rem);
+            line-height: .98;
+            letter-spacing: -.055em
+        }
+
+        h1 span {
+            position: relative;
+            color: var(--blue)
+        }
+
+        h1 span:after {
+            position: absolute;
+            right: 3%;
+            bottom: -7px;
+            width: 92%;
+            height: 7px;
+            border-top: 2px solid #82aca7;
+            border-radius: 50%;
+            content: "";
+            transform: rotate(-1deg)
+        }
+
+        .hero-text {
+            max-width: 670px;
+            margin-bottom: 30px;
+            color: var(--muted);
+            font-size: clamp(1.05rem, 2vw, 1.22rem)
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            padding: 9px 20px;
+            border: 1px solid var(--blue);
+            border-radius: 12px;
+            background: var(--blue);
+            box-shadow: 0 8px 20px rgba(77, 127, 152, .14);
+            color: #fff;
+            font-weight: 800;
+            text-decoration: none;
+            transition: .16s
+        }
+
+        .button:hover {
+            background: #3e6e86;
+            transform: translateY(-1px)
+        }
+
+        .button.secondary {
+            border-color: #b9ced3;
+            background: transparent;
+            box-shadow: none;
+            color: var(--navy)
+        }
+
+        .button.secondary:hover {
+            background: #eef4f3
+        }
+
+        .hero-aside {
+            position: relative;
+            min-height: 350px
+        }
+
+        .initials {
+            position: absolute;
+            top: 38px;
+            left: 28px;
+            width: 184px;
+            aspect-ratio: 1;
+            border: 1px solid #c9dcda;
+            border-radius: 48% 52% 55% 45%;
+            background: #e5efec;
+            transform: rotate(3deg);
+
+            overflow: hidden;
+        }
+
+        .initials:after {
+            position: absolute;
+            inset: 12px;
+            border: 1px dashed rgba(79, 141, 131, .28);
+            border-radius: inherit;
+            content: ""
+        }
+
+        .avatar {
+            position: absolute;
+            z-index: 1;
+
+            top: 4px;
+            left: -10px;
+
+            width: 204px;
+            height: 180px;
+
+            object-fit: contain;
+            object-position: center bottom;
+
+            filter: drop-shadow(0 10px 14px rgba(48, 72, 75, .10));
+            transform: rotate(-3deg);
+        }
+
+        .personal-note {
+            position: absolute;
+            z-index: 2;
+            right: -18px;
+            bottom: 5px;
+            width: 265px;
+            padding: 20px 22px 22px;
+            border: 1px solid #d8dfd5;
+            border-radius: 4px 4px 12px 4px;
+            background: #fffdf4;
+            box-shadow: 8px 12px 26px rgba(60, 76, 66, .08);
+            color: #4c5e60;
+            font-size: .96rem;
+            transform: rotate(-2deg)
+        }
+
+        .personal-note:before {
+            position: absolute;
+            top: -8px;
+            left: 40%;
+            width: 70px;
+            height: 18px;
+            background: rgba(191, 210, 201, .55);
+            content: "";
+            transform: rotate(2deg)
+        }
+
+        .note-label {
+            display: block;
+            margin-bottom: 7px;
+            color: var(--teal);
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: .07em
+        }
+
+        .section {
+            padding-block: 88px
+        }
+
+        .section-heading {
+            max-width: 690px;
+            margin-bottom: 46px
+        }
+
+        .section-label {
+            margin-bottom: 8px;
+            color: var(--teal);
+            font-size: .82rem;
+            font-weight: 800;
+            letter-spacing: .06em
+        }
+
+        h2 {
+            margin-bottom: 11px;
+            font-size: clamp(1.9rem, 4vw, 2.8rem);
+            line-height: 1.22;
+            letter-spacing: -.03em
+        }
+
+        .section-heading>p:last-child {
+            color: var(--muted)
+        }
+
+        .interests {
+            position: relative;
+            display: grid;
+            grid-template-columns: .9fr 1.15fr .9fr;
+            align-items: center;
+            gap: 34px;
+            padding: 40px 0
+        }
+
+        .interests:before {
+            position: absolute;
+            top: 50%;
+            right: 13%;
+            left: 13%;
+            border-top: 1px dashed #a9c6c2;
+            content: "";
+            z-index: -1
+        }
+
+        .interest {
+            position: relative;
+            padding: 25px 26px;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: var(--white);
+            box-shadow: 0 10px 28px rgba(43, 68, 78, .05)
+        }
+
+        .interest:nth-child(2) {
+            width: calc(100% + 10px);
+            margin-top: 70px;
+            justify-self: center
+        }
+
+        .interest:nth-child(3) {
+            margin-top: -45px
+        }
+
+        .interest:before {
+            position: absolute;
+            top: 50%;
+            right: -7px;
+            width: 12px;
+            height: 12px;
+            border: 3px solid var(--paper);
+            border-radius: 50%;
+            background: var(--teal);
+            content: ""
+        }
+
+        .interest small {
+            color: var(--blue);
+            font-weight: 800
+        }
+
+        .interest h3 {
+            margin: 3px 0 7px;
+            font-size: 1.28rem
+        }
+
+        .interest p {
+            margin-bottom: 0;
+            color: var(--muted);
+            font-size: .95rem
+        }
+
+        .connection-note {
+            width: fit-content;
+            margin: 24px auto 0;
+            padding: 9px 16px;
+            border-bottom: 2px solid #b9d5cf;
+            color: var(--navy);
+            font-weight: 700;
+            text-align: center;
+            transform: rotate(-1deg)
+        }
+
+        .project-wrap {
+            padding-block: 100px;
+            background: linear-gradient(180deg, transparent, rgba(220, 235, 229, .34) 10%, rgba(220, 235, 229, .34) 90%, transparent)
+        }
+
+        .project {
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 28px;
+            background: var(--navy);
+            box-shadow: 0 22px 55px rgba(36, 62, 77, .15);
+            color: #f7fbfb
+        }
+
+        .project-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 30px;
+            padding: 43px 46px 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, .1)
+        }
+
+        .project-top h2 {
+            margin-bottom: 0
+        }
+
+        .project-tag {
+            padding: 7px 13px;
+            border: 1px solid rgba(164, 215, 202, .32);
+            border-radius: 999px;
+            background: rgba(79, 141, 131, .15);
+            color: #bfe3da;
+            font-size: .78rem;
+            font-weight: 800
+        }
+
+        .snapshot {
+            display: grid;
+            grid-template-columns: .7fr 1.1fr 1.2fr
+        }
+
+        .snapshot-block {
+            padding: 34px 38px 40px;
+            border-left: 1px solid rgba(255, 255, 255, .1)
+        }
+
+        .snapshot-block:last-child {
+            border-left: 0
+        }
+
+        .snapshot-label {
+            margin-bottom: 14px;
+            color: #93c8bc;
+            font-size: .76rem;
+            font-weight: 800;
+            letter-spacing: .07em
+        }
+
+        .role {
+            font-size: 1.8rem;
+            font-weight: 800
+        }
+
+        .snapshot ul {
+            margin: 0;
+            padding: 0 18px 0 0;
+            color: #d5e0e3
+        }
+
+        .snapshot li {
+            margin-bottom: 7px
+        }
+
+        .flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 18px 24px;
+            border-top: 1px solid rgba(255, 255, 255, .1);
+            background: rgba(255, 255, 255, .035);
+            color: #e4efef;
+            direction: ltr
+        }
+
+        .flow span {
+            padding: 7px 12px;
+            border: 1px solid rgba(255, 255, 255, .14);
+            border-radius: 9px;
+            direction: rtl
+        }
+
+        .flow b {
+            color: #91cabc;
+            font-weight: 400
+        }
+
+        .work-note {
+            display: grid;
+            grid-template-columns: .6fr 1.4fr;
+            gap: 45px;
+            align-items: center;
+            padding: 42px 44px;
+            border: 1px solid var(--line);
+            border-radius: 6px 20px 20px 6px;
+            background: var(--white);
+            box-shadow: var(--shadow);
+            transform: rotate(.35deg)
+        }
+
+        .work-note h2 {
+            margin-bottom: 0
+        }
+
+        .workflow {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: var(--navy);
+            font-weight: 700
+        }
+
+        .workflow span {
+            padding: 8px 10px;
+            border-bottom: 2px solid var(--mint);
+            white-space: nowrap
+        }
+
+        .workflow b {
+            color: var(--teal);
+            font-weight: 400
+        }
+
+        .course {
+            display: grid;
+            grid-template-columns: .8fr 1.2fr;
+            gap: 52px;
+            align-items: start
+        }
+
+        .course-copy {
+            padding: 30px 32px;
+            border-right: 3px solid #9fc6bd;
+            background: rgba(255, 254, 251, .72)
+        }
+
+        .course-copy p {
+            margin-bottom: 0;
+            color: var(--muted);
+            font-size: 1.05rem
+        }
+
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 22px;
+            direction: ltr
+        }
+
+        .keywords span {
+            padding: 5px 10px;
+            border: 1px solid #cfdedb;
+            border-radius: 999px;
+            color: #587174;
+            font-size: .76rem
+        }
+
+        .contact {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            padding-block: 54px;
+            border-top: 1px solid var(--line)
+        }
+
+        .contact h2 {
+            font-size: clamp(1.55rem, 3vw, 2.15rem)
+        }
+
+        .contact-arrow {
+            display: inline-block;
+            margin-right: 3px;
+            color: var(--teal);
+            font-size: .72em;
+            font-weight: 400;
+            opacity: .55;
+            transform: rotate(-5deg)
+        }
+
+        .contact p {
+            margin-bottom: 0;
+            color: var(--muted)
+        }
+
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px
+        }
+
+        .contact-links a {
+            padding: 7px 11px;
+            border-bottom: 1px solid #a9c6c2;
+            color: var(--navy);
+            font-weight: 800;
+            text-decoration: none;
+            transition: .16s
+        }
+
+        .contact-links a:hover {
+            background: var(--mint);
+            color: #315f59
+        }
+
+        footer {
+            padding-block: 24px 34px;
+            color: var(--muted);
+            font-size: .85rem
+        }
+
+        :focus-visible {
+            outline: 3px solid rgba(79, 141, 131, .42);
+            outline-offset: 3px
+        }
+
+        @media(max-width:820px) {
+            .nav-links {
+                display: none
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding-block: 65px 82px;
+                text-align: center
+            }
+
+            .hero .kicker,
+            .actions {
+                justify-content: center
+            }
+
+            .hero-aside {
+                min-height: 330px
+            }
+
+            .initials {
+                right: calc(50% - 92px);
+                left: auto;
+                width: 170px;
+                overflow: hidden;
+            }
+
+            .avatar {
+                top: 12px;
+                left: -10px;
+                width: 190px;
+                height: 155px;
+                object-fit: contain;
+                object-position: center bottom;
+            }
+
+            .personal-note {
+                right: calc(50% - 130px);
+                bottom: -8px
+            }
+
+            .interests {
+                grid-template-columns: 1fr;
+                gap: 18px;
+                padding-right: 28px
+            }
+
+            .interests:before {
+                top: 8%;
+                right: 6px;
+                bottom: 8%;
+                left: auto;
+                border-top: 0;
+                border-right: 1px dashed #a9c6c2
+            }
+
+            .interest:nth-child(2),
+            .interest:nth-child(3) {
+                width: 100%;
+                margin: 0
+            }
+
+            .snapshot {
+                grid-template-columns: 1fr
+            }
+
+            .snapshot-block {
+                border-bottom: 1px solid rgba(255, 255, 255, .1);
+                border-left: 0
+            }
+
+            .work-note,
+            .course {
+                grid-template-columns: 1fr;
+                gap: 24px
+            }
+
+            .workflow {
+                flex-wrap: wrap
+            }
+
+            .contact {
+                align-items: flex-start;
+                flex-direction: column
+            }
+        }
+
+        @media(max-width:520px) {
+            .container {
+                width: min(100% - 28px, 1060px)
+            }
+
+            h1 {
+                font-size: 3.25rem
+            }
+
+            .section {
+                padding-block: 66px
+            }
+
+            .project-top {
+                flex-direction: column;
+                padding: 30px 26px 22px
+            }
+
+            .snapshot-block {
+                padding: 27px 26px
+            }
+
+            .flow {
+                flex-wrap: wrap;
+                font-size: .88rem
+            }
+
+            .work-note {
+                padding: 30px 25px
+            }
+
+            .workflow {
+                gap: 5px;
+                font-size: .88rem
+            }
+
+            .course-copy {
+                padding: 24px 22px
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            html {
+                scroll-behavior: auto
+            }
+
+            *,
+            *:before,
+            *:after {
+                transition: none !important
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <nav class="nav container" aria-label="ניווט ראשי"><a class="brand" href="#top">לוג'יין עווידאת</a>
+            <ul class="nav-links">
+                <li><a href="#about">אודות</a></li>
+                <li><a href="#project">פרויקט</a></li>
+                <li><a href="#goals">מטרות לקורס</a></li>
+                <li><a href="#contact">יצירת קשר</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main id="top">
+        <section class="hero container" aria-labelledby="hero-title">
+            <div>
+                <p class="kicker">סטודנטית למדעי המחשב</p>
+                <h1 id="hero-title">היי, אני <span>לוג'יין.</span></h1>
+                <p class="hero-text">לקראת סיום התואר, עם תשוקה לפיתוח תוכנה, לטכנולוגיות חדשות וליצירת פתרונות שמחברים
+                    בין ממשק מצוין למערכת חזקה.</p>
+                <div class="actions"><a class="button" href="#project">לפרויקט שלי</a><a class="button secondary"
+                        href="#contact">בואו נדבר</a></div>
+            </div>
+            <aside class="hero-aside" aria-label="הערה אישית">
+                <div class="initials"><img class="avatar" src="assets/lujain_avatar.png"
+                        alt="איור של לוג'יין מנופפת לשלום"></div>
+                <div class="personal-note"><span class="note-label">כרגע / NOW</span>לקראת סיום התואר, לומדת, בונה ומנסה
+                    להבין איך כל החלקים מתחברים.</div>
+            </aside>
+        </section>
+        <section class="section container" id="about" aria-labelledby="about-title">
+            <div class="section-heading">
+                <p class="section-label">01 / תחומי עניין</p>
+                <h2 id="about-title">מה מושך אותי בעולם הפיתוח?</h2>
+                <p>לא רק כל תחום בפני עצמו — אלא הדרך שבה השכבות השונות במערכת מתחברות למוצר שלם.</p>
+            </div>
+            <div class="interests">
+                <article class="interest"><small>מאחורי הקלעים</small>
+                    <h3>Backend</h3>
+                    <p>פיתוח הלוגיקה, השירותים והחיבורים שמאפשרים למערכות לפעול באופן יציב ויעיל.</p>
+                </article>
+                <article class="interest"><small>נקודת המפגש</small>
+                    <h3>Frontend</h3>
+                    <p>בניית ממשקים ברורים ונוחים, שמתרגמים רעיון לחוויה שימושית ונגישה.</p>
+                </article>
+                <article class="interest"><small>מבט קדימה</small>
+                    <h3>בינה מלאכותית</h3>
+                    <p>תחום שבחרתי להתמקד בו בלימודים ושממשיך לעורר בי עניין מקצועי וסקרנות.</p>
+                </article>
+            </div>
+            <p class="connection-note">Backend ↔ Frontend ↔ AI — להבין איך הכול מתחבר</p>
+        </section>
+        <section class="project-wrap" id="project" aria-labelledby="project-title">
+            <div class="container">
+                <article class="project">
+                    <header class="project-top">
+                        <div>
+                            <p class="section-label">02 / PROJECT SNAPSHOT</p>
+                            <h2 id="project-title">פרויקט בשיתוף NVIDIA</h2>
+                        </div><span class="project-tag">מערכת אמיתית · עבודת צוות</span>
+                    </header>
+                    <div class="snapshot">
+                        <div class="snapshot-block">
+                            <p class="snapshot-label">התפקיד שלי</p>
+                            <div class="role">UI &amp; API</div>
+                        </div>
+                        <div class="snapshot-block">
+                            <p class="snapshot-label">על מה עבדתי</p>
+                            <ul>
+                                <li>פיתוח הממשק</li>
+                                <li>חיבור ל־APIs</li>
+                                <li>חיבור לרכיבים נוספים במערכת</li>
+                            </ul>
+                        </div>
+                        <div class="snapshot-block">
+                            <p class="snapshot-label">מה לקחתי מהפרויקט</p>
+                            <ul>
+                                <li>התנסות בפיתוח מערכת אמיתית</li>
+                                <li>עבודה כחלק מצוות</li>
+                                <li>אינטגרציה בין כמה חלקים במערכת</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="flow" aria-label="תהליך החיבור בפרויקט">
+                        <span>UI</span><b>→</b><span>API</span><b>→</b><span>רכיבים נוספים במערכת</span></div>
+                </article>
+            </div>
+        </section>
+        <section class="section container" aria-labelledby="work-title">
+            <div class="work-note">
+                <div>
+                    <p class="section-label">הערת עבודה</p>
+                    <h2 id="work-title">איך אני אוהבת לעבוד</h2>
+                </div>
+                <div class="workflow" aria-label="תהליך העבודה שלי"><span>להבין את המערכת</span><b>←</b><span>לפרק
+                        לחלקים</span><b>←</b><span>לבנות</span><b>←</b><span>לבדוק</span><b>←</b><span>להתקדם</span>
+                </div>
+            </div>
+        </section>
+        <section class="section container course" id="goals" aria-labelledby="goals-title">
+            <div>
+                <p class="section-label">03 / לקראת הקורס</p>
+                <h2 id="goals-title">מה אני רוצה לקחת איתי מהקורס?</h2>
+            </div>
+            <div class="course-copy">
+                <p>אני רוצה להעמיק את היכולת לעבוד עם כלי AI באופן מקצועי ולשלב אותם בתהליך פיתוח אמיתי. חשוב לי לשפר את
+                    הדרך שבה אני מתכננת, מפתחת ובודקת פתרונות בעזרתם, ולצאת מהקורס עם כלים מעשיים שישרתו אותי בהמשך הדרך
+                    בתעשיית ההייטק.</p>
+                <div class="keywords" aria-label="מילות מפתח"><span>Plan better</span><span>Build
+                        smarter</span><span>Use AI professionally</span></div>
+            </div>
+        </section>
+        <section class="contact container" id="contact" aria-labelledby="contact-title">
+            <div>
+                <h2 id="contact-title">אפשר למצוא אותי אונליין <span class="contact-arrow" aria-hidden="true">←</span>
+                </h2>
+            </div>
+            <div class="contact-links"><a href="https://github.com/Lujainawi" target="_blank"
+                    rel="noopener noreferrer">GitHub</a><a href="https://www.linkedin.com/in/lujain-awidat/"
+                    target="_blank" rel="noopener noreferrer">LinkedIn</a><a
+                    href="mailto:lojenawidat2002@gmail.com">Email</a></div>
+        </section>
+    </main>
+    <footer class="container"> לוג'ין עווידאת</footer>
+</body>
+
+</html>
